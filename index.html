@@ -39,8 +39,9 @@
 <li>Basic SQL knowledge</li>
 <li>Browser</li>
 <li>Some ML knowledge (&#34;what is classification?&#34; level)</li>
+<li>Notepad</li>
 </ul>
-<p>We recommend you to have npm and Node.js already installed on your machine to quickly boot up a http server.</p>
+<p>When following steps, copy all commands to notepad so you have a history.</p>
 <aside class="warning"><p>To play with Big Query ML you need GCP account with billing set up.</p>
 </aside>
 <aside class="special"><p>Luckily we are providing qwiklab tokens which you can use during this workshop.</p>
@@ -49,7 +50,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Qwiklab" duration="3">
+      <google-codelab-step label="Qwiklab" duration="50">
         <p><a href="https://google.qwiklabs.com/focuses/1797?catalog_rank=%7B%22rank%22%3A7%2C%22num_filters%22%3A3%2C%22has_search%22%3Atrue%7D&locale=en&parent=catalog&search_id=2649998" target="_blank">Here</a> is the Taxi Fare lab.</p>
 <p>To start:</p>
 <ul>
@@ -100,9 +101,9 @@ ST_Distance(
 
       </google-codelab-step>
     
-      <google-codelab-step label="Joining with other datasets" duration="0">
+      <google-codelab-step label="Joining with other datasets" duration="3">
         <p>Taxis orders are are highly correlated with weather. There is no multiplier happening, but it can give some infrmation.<br><code>bigquery-public-data.noaa_gsod.gsod*</code> contains some information about weather.<br>Climate data for &#34;New York&#34; is taken from La Guardia weather station.</p>
-<p>Table details are <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:noaa_gsod.gsod2014?pli=1" target="_blank">here</a><br>Sample query below:</p>
+<p>Table details can be peeked <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:noaa_gsod.gsod2014?pli=1" target="_blank">here</a>.<br>Sample query below:</p>
 <pre><code>select * FROM
  `bigquery-public-data.noaa_gsod.gsod*`
 WHERE
@@ -110,6 +111,7 @@ WHERE
  AND _TABLE_SUFFIX IN(&#39;2014&#39;,&#39;2015&#39;)
  limit 10
 </code></pre>
+<p>Prepare fields that sound useful for prediction and create proper fields to join. Have in mind that weather station report data multiple times per day.</p>
 
 
       </google-codelab-step>
