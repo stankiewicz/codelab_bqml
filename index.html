@@ -1,0 +1,125 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Getting started with BigQuery ML for data analysts</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="0"
+                  id="1"
+                  title="Getting started with BigQuery ML for data analysts"
+                  environment="web"
+                  feedback-link="radoslaws@google.com">
+    
+      <google-codelab-step label="Overview of the tutorial" duration="2">
+        <p>This tutorial will show you how to move from running SQL to running ML within SQL.<br>In details you will learn</p>
+<ul>
+<li>how to create simple models - regression, classification and clustering</li>
+<li>how to evaluate quality of model</li>
+<li>how to do it better with feature engineering and data cleansing</li>
+</ul>
+<p>Prerequesites</p>
+<ul>
+<li>Basic SQL knowledge</li>
+<li>Browser</li>
+<li>Some ML knowledge (&#34;what is classification?&#34; level)</li>
+</ul>
+<p>We recommend you to have npm and Node.js already installed on your machine to quickly boot up a http server.</p>
+<aside class="warning"><p>To play with Big Query ML you need GCP account with billing set up.</p>
+</aside>
+<aside class="special"><p>Luckily we are providing qwiklab tokens which you can use during this workshop.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Qwiklab" duration="3">
+        <p><a href="https://google.qwiklabs.com/focuses/1797?catalog_rank=%7B%22rank%22%3A7%2C%22num_filters%22%3A3%2C%22has_search%22%3Atrue%7D&locale=en&parent=catalog&search_id=2649998" target="_blank">Here</a> is the Taxi Fare lab.</p>
+<p>To start:</p>
+<ul>
+<li>If you have GCP account (logout) or open link above in incognito mode</li>
+<li>Login to awiklabs</li>
+<li>press &#34;Start Lab&#34;</li>
+<li>Enter Access Code you have been provided</li>
+</ul>
+<p>Follow instruction but please don&#39;t just copy paste.</p>
+<p>Before you begin, please go to next slides</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Feature engineering" duration="3">
+        <p>During lab you will predict taxi fare. In order to reduce error, you will add new features.</p>
+<p>Give it a try to introduce new features:</p>
+<ul>
+<li>feature crosses:<br><br><ul>
+<li>Day of the week with hour of the day</li>
+<li>Rounded Pick-up with drop-off pair</li>
+</ul>
+</li>
+<li>new categories<br><br><ul>
+<li>pick up</li>
+<li>drop off</li>
+</ul>
+</li>
+</ul>
+<p>How to create those? Just introduce new fields to select using functions. You can <code>concat(first_field, second_field)</code>, use math fuctions if you know how to calculate euclidean distance or use GIS functions - check next step.</p>
+<p>Go back to this slide when you are asked to do feature engineering.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="GIS functions" duration="3">
+        <p>Recently Google introduced BigQuery GIS functions. <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions" target="_blank">Here</a> is the reference for all functions.</p>
+<p>If latitude and longitude of pickup and dropoff are provided, to calculate distance you can write:</p>
+<pre><code>...
+ST_Distance(
+  ST_GeogPoint(pickup_longitude, pickup_latitude),
+  ST_GeogPoint(dropoff_longitude, dropoff_latitude)
+  ) AS distance
+...
+</code></pre>
+<p>If you want to round long-lat point to grid, you can use <code>ST_SNAPTOGRID</code> method.<br>To convert geopoint to string <code>ST_ASTEXT</code> can be used.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Joining with other datasets" duration="0">
+        <p>Taxis orders are are highly correlated with weather. There is no multiplier happening, but it can give some infrmation.<br><code>bigquery-public-data.noaa_gsod.gsod*</code> contains some information about weather.<br>Climate data for &#34;New York&#34; is taken from La Guardia weather station.</p>
+<p>Table details are <a href="https://bigquery.cloud.google.com/table/bigquery-public-data:noaa_gsod.gsod2014?pli=1" target="_blank">here</a><br>Sample query below:</p>
+<pre><code>select * FROM
+ `bigquery-public-data.noaa_gsod.gsod*`
+WHERE
+ stn=&#39;725030&#39;
+ AND _TABLE_SUFFIX IN(&#39;2014&#39;,&#39;2015&#39;)
+ limit 10
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

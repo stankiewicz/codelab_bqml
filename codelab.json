@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-05-28T14:24:53+02:00",
+  "id": "1",
+  "duration": 11,
+  "title": "Getting started with BigQuery ML for data analysts",
+  "summary": "BigQuery ML for analysts workshop",
+  "source": "gangnam.md",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "bqml"
+  ],
+  "tags": [
+    "gcp"
+  ],
+  "feedback": "radoslaws@google.com",
+  "ga": "0",
+  "url": "1"
+}
