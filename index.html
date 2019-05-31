@@ -116,6 +116,41 @@ WHERE
 
       </google-codelab-step>
     
+      <google-codelab-step label="Next lab (if you still have time)" duration="15">
+        <p>In this lab you will be able to predict if person can have income above 50k$ or below. It is classification problem.</p>
+<ol type="1">
+<li>Start new lab (or continue previous)</li>
+<li>In BQ UI search for bigquery-public-data dataset</li>
+<li>Explore bigquery-public-data.ml_datasets.census_adult_income</li>
+<li>Build model to predict income_bracket</li>
+<li>Learn how to inspect model</li>
+</ol>
+<p>Confusion matrix can be <a href="https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-confusion" target="_blank">calculated</a>.</p>
+<pre><code>SELECT
+  *
+FROM
+  ML.CONFUSION_MATRIX(MODEL `dataset.model`,
+  (
+    select * from `dataset.data`))
+</code></pre>
+<p>It can be also inspected inside model evaluation tab (set treshold to 0.5).</p>
+<p>It&#39;s good to know what are the <a href="https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-weights" target="_blank">weights</a> used in the model to better understand what is important.</p>
+<pre><code>SELECT
+  *
+FROM
+  ML.WEIGHTS(MODEL `dataset.model`,
+    STRUCT(true AS standardize))
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Finished?" duration="1">
+        <p>Thank you! :)</p>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
